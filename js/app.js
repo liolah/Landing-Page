@@ -14,11 +14,6 @@
  */
 
 /**
- * Comments should be present at the beginning of each procedure and class.
- * Great to have comments before crucial code sections within the procedure.
- */
-
-/**
  * Define Global Variables
  *
  */
@@ -27,6 +22,8 @@ const sections = document.querySelectorAll("section");
 const navbarMenu = document.getElementById("navbar__list");
 let previousActiveSection;
 let previousActiveLink;
+let scrolled = true;
+
 
 /**
  * End Global Variables
@@ -49,14 +46,12 @@ function createNavBar() {
 function goToSection(event) {
   const link = event.target;
   const section = document.getElementById(event.target.getAttribute("name"));
-  // const previousActiveLink = document.querySelector(".active-class");
-  // const previousActiveSection = document.querySelector(".active-link");
-  previousActiveSection == null
-    ? (previousActiveSection = section)
-    : (previousActiveSection = previousActiveSection);
-  previousActiveLink == null
-    ? (previousActiveLink = link)
-    : (previousActiveLink = previousActiveLink);
+  if (previousActiveSection == null) {
+    previousActiveSection = section;
+  }
+  if (previousActiveLink == null) {
+    previousActiveLink = link;
+  }
   previousActiveSection.classList.remove("active-class");
   previousActiveLink.classList.remove("active-link");
   section.scrollIntoView({ behavior: "smooth" });
@@ -93,7 +88,7 @@ function scrollControl() {
         [index].classList.add("active-link");
       activeSection.classList.remove("active-class");
       activeLink.classList.remove("active-link");
-    } else if (topPosition - activeSection.clientHeight > 0) {
+    } else if (topPosition - activeSection.clientHeight > -20) {
       let index =
         Array.from(document.querySelectorAll("section")).indexOf(
           activeSection
@@ -107,6 +102,22 @@ function scrollControl() {
     }
   }
 }
+
+function hideNavebar() {
+  if (scrolled == true) {
+    scrolled = false;
+  } else {
+    let navBar = document.querySelector(".page__header");
+    navBar.classList.add("hiddenNav");
+  }
+}
+
+function scrollState() {
+  scrolled = true;
+  let navBar = document.querySelector(".page__header");
+  navBar.classList.remove("hiddenNav");
+}
+
 /**
  * End Helper Functions
  * Begin Main Functions
@@ -120,7 +131,9 @@ window.addEventListener("DOMContentLoaded", createNavBar);
 // Scroll to section ID using scrollTO event
 navbarMenu.addEventListener("click", goToSection);
 window.addEventListener("scroll", scrollControl);
-
+window.addEventListener("scroll", scrollState);
+document.querySelector(".page__header").addEventListener("mouseenter", scrollState);
+setInterval(hideNavebar, 3000);
 /**
  *  Add/Remove class 'active-class' from/to sections according to scrolling
     Add/Remove class 'active-link' from/to navBar links according to scrolling

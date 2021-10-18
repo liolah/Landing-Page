@@ -131,8 +131,13 @@ section {
   top: 0;
   width: 100%;
   z-index: 5;
+  transition: ease 0.5s all;
 }
 
+.hiddenNav{
+  top: -60px;
+  transition: ease 0.5s all;
+}
 /* Footer Styles */
 
 .page__footer {
