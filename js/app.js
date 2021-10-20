@@ -130,7 +130,7 @@ function showNavBarWhenScrolling() {
 
 // Make the scroll button visible when needed
 function showScrollTopBtn() {
-  let scrollBtn = document.querySelector(".scroll-btn-border");
+  let scrollBtn = document.querySelector(".scroll-top-btn");
   if (window.scrollY >= 750) {
     scrollBtn.style.display = "block";
   } else {
