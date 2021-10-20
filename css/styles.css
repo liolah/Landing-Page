@@ -139,6 +139,7 @@ section {
   color: rgba(255, 255, 255, 0.8);
   text-align: center;
   padding: 15px;
+  transition: display 0.8s ease ;
 }
 
 .scroll-top-btn:hover {
@@ -163,7 +164,7 @@ div.scroll-top-btn svg {
 }
 
 .hiddenNav {
-  top: -60px;
+  transform: translateY(-100%);
   transition: ease 0.5s all;
 }
 /* Footer Styles */
