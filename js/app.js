@@ -128,19 +128,42 @@ function showNavBarWhenScrolling() {
   navBar.classList.remove("hiddenNav");
 }
 
+// Make the scroll button visible when needed
+function showScrollTopBtn() {
+  let scrollBtn = document.querySelector(".scroll-btn-border");
+  if (window.scrollY >= 750) {
+    scrollBtn.style.display = "block";
+  } else {
+    scrollBtn.style.display = "none";
+  }
+}
+
+// Scroll to the top left of the page
+function scrollToTop() {
+  window.scrollTo({
+    top: 0,
+    left: 0,
+    behavior: 'smooth'
+  });
+}
 // End Main Functions
 // Begin Events
 
-//Creates the navBar dynamically according to the number of sections and thier h2 elements text content
+//Creates the navBar dynamically according to the number of sections and their h2 elements text content
 window.addEventListener("DOMContentLoaded", createNavBar);
 // Scroll to section on link click
 navbarMenu.addEventListener("click", goToSection);
-// Sets links and sections active/inactive according to thier position in the viewport
+// Sets links and sections active/inactive according to their position in the viewport
 window.addEventListener("scroll", scrollControl);
 // Show the navBar when scrolling
 window.addEventListener("scroll", showNavBarWhenScrolling);
 // show the navBar when moving the mouse cursor near the top of the viewport
 window.addEventListener("mousemove", showNavBarWhenMouseMove);
+// Hides the navBar after 2 seconds of no scrolling or mouse movement near the top of the viewport
 setInterval(hideNavbar, 2000);
+// Show scroll to top button at certain Y position
+window.addEventListener("scroll", showScrollTopBtn);
+// Scroll to top
+document.querySelector(".scroll-top-btn").addEventListener("click", scrollToTop);
 
 // End Events
