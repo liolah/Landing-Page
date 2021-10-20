@@ -93,7 +93,7 @@ section {
   justify-content: center;
 }
 
-.navbar__menu li {
+.navbar__menu a {
   display: inline-block;
   cursor: pointer;
   user-select: none;
